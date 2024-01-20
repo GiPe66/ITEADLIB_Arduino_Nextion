@@ -36,6 +36,12 @@
  */
 #define nexSerial Serial2
 
+/**
+ * Define dbSerial baud rate for the output of debug messages. 
+ */
+#ifndef DBSERIALBAUD
+#define DBSERIALBAUD 9600
+#endif
 
 #ifdef DEBUG_SERIAL_ENABLE
 #define dbSerialPrint(a)    dbSerial.print(a)
