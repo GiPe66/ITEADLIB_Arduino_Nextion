@@ -14,6 +14,16 @@
  */
 #include "NexHardware.h"
 
+#ifndef NEXT_BAUDRATE
+	#define NEXT_BAUDRATE 9600
+#endif
+#ifndef NEXT_RX
+	#define NEXT_RX 16 // Nextion RX pin | Default 16
+#endif
+#ifndef NEXT_TX
+	#define NEXT_TX 17 // Nextion TX pin | Default 17
+#endif
+
 #define NEX_RET_CMD_FINISHED            (0x01)
 #define NEX_RET_EVENT_LAUNCHED          (0x88)
 #define NEX_RET_EVENT_UPGRADED          (0x89)
@@ -222,8 +232,9 @@ bool nexInit(void)
     bool ret1 = false;
     bool ret2 = false;
     
-    dbSerialBegin(9600);
-    nexSerial.begin(9600);
+    dbSerialBegin(DBSERIALBAUD);
+    // nexSerial.begin(9600);
+    nexSerial.begin(NEXT_BAUDRATE, SERIAL_8N1, NEXT_RX, NEXT_TX);
     sendCommand("");
     sendCommand("bkcmd=1");
     ret1 = recvRetCommandFinished();
